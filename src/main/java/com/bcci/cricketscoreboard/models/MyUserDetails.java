@@ -1,7 +1,7 @@
 package com.bcci.cricketscoreboard.models;
 
-import com.bcci.cricketscoreboard.domain.Role;
-import com.bcci.cricketscoreboard.domain.User;
+import com.bcci.cricketscoreboard.domain.users.Role;
+import com.bcci.cricketscoreboard.domain.users.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

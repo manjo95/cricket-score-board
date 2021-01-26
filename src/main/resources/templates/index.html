@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Product Manager</title>
+    <title>Score Board Manager</title>
 </head>
 <body>
 <div align="center">
@@ -14,12 +14,28 @@
     </div>
 
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout" />
+        <input type="submit" value="Logout"/>
     </form>
 
-    <h1>Product Manager</h1>
-    <div sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
-        <a href="new">Create New Product</a>
+    <h1>Score Board</h1>
+
+
+    <div sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+
+        <div>
+            <a th:href="@{/teamlist}" >teams</a>
+        </div>
+
+        <div>
+            <a th:href="@{/teams/new}">Add Team</a>
+        </div>
+        <div>
+            <a th:href="@{/playerslist}">List players</a>
+        </div>
+        <div>
+            <a th:href="@{/players/new}">Add players</a>
+        </div>
+
     </div>
 
     <br/><br/>

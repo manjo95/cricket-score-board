@@ -2,7 +2,7 @@ package com.bcci.cricketscoreboard.services;
 
 import com.bcci.cricketscoreboard.Repository.UserRepository;
 import com.bcci.cricketscoreboard.models.MyUserDetails;
-import com.bcci.cricketscoreboard.domain.User;
+import com.bcci.cricketscoreboard.domain.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

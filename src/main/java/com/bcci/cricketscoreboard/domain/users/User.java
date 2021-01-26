@@ -1,4 +1,4 @@
-package com.bcci.cricketscoreboard.domain;
+package com.bcci.cricketscoreboard.domain.users;
 
 import javax.persistence.*;
 import java.util.HashSet;

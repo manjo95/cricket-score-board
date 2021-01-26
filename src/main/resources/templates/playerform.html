@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>CreateNewPlayer</title>
+
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:if="${players.id == null}"><h1>Create New Player</h1></div>
+    <div th:unless="${players.id == null}"><h1>Edit Player</h1></div>
+    <h1>Create New Player</h1>
+    <div>
+        <form th:action="@{/saveplayer}" th:object="${players}" method="post" style="max-width: 600px; margin: 0 auto;">
+            <input type="hidden" th:field="*{id}" th:value="${players.id}">
+            <div class="form-group">
+                <label>player name:</label><br>
+                <input type="text" th:field="*{name}" class="form-control" required>
+                <div>
+                    <label>Team:</label>
+                    <select th:field="*{teams}" class="form-control" required>
+                        <th:block th:each="team : ${teamlist}">
+                            <option th:text="${team.name}" th:value="${team.id}"/>
+                        </th:block>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

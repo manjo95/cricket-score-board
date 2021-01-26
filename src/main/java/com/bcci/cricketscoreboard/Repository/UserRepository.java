@@ -1,6 +1,6 @@
 package com.bcci.cricketscoreboard.Repository;
 
-import com.bcci.cricketscoreboard.domain.User;
+import com.bcci.cricketscoreboard.domain.users.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

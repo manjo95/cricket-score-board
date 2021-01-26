@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Team List</title>
+
+</head>
+<body>
+
+<div class="container text-center">
+    <h1>List of Teams</h1>
+    <div>
+        <table class="table table-bordered">
+
+            <thead class="text-center">
+
+            <tr>
+                <th>Team ID</th>
+                <th>Team Name</th>
+                <th>Edit / Delete</th>
+            </tr>
+
+            </thead>
+            <tbody>
+
+            <tr th:each="teams : ${teamsList}">
+                <td>[[${teams.id}]]</td>
+                <td>[[${teams.name}]]</td>
+                <td><a th:href="@{'/teams/edit/'+${teams.id}}">Edit</a>
+                &nbsp;
+                    <a th:href="@{'/teams/delete/'+${teams.id}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</body>
+</html>
