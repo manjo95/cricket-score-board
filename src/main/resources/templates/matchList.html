@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -52,7 +54,9 @@
 
                 <td><a th:href="@{'/matchList/edit/'+${matchList.id}}">Edit</a>
                     &nbsp;&nbsp;
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
                     <a th:href="@{'/matchList/delete/'+${matchList.id}}">Delete</a>
+                    </div>
                 </td>
             </tr>
             </tbody>

@@ -92,7 +92,9 @@
         </button>
         <div class="dropdown-content">
             <a th:href="@{/teamlist}" >List Team</a>
+            <div sec:authorize="hasAnyAuthority('USER')">
             <a th:href="@{/teams/new}">Add new Team</a>
+            </div>
         </div>
     </div>
 
