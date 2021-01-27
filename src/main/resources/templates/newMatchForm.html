@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>CreateNewMatches</title>
+
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:if="${matches.id == null}"><h1>Create New Match</h1></div>
+    <div th:unless="${matches.id == null}"><h1>Edit Match</h1></div>
+    <div>
+        <form th:action="@{/saveMatch}" th:object="${matches}" method="post" style="max-width: 600px; margin: 0 auto;">
+            <input type="hidden" th:field="*{id}" th:value="${matches.id}">
+            <div class="form-group">
+                <label>Match Name:</label><br>
+                <input type="text" th:field="*{name}" class="form-control" required>
+                <label>No.of Overs:</label><br>
+                <input type="number" th:field="*{overs}" class="form-control" required>
+                <label>Venue:</label><br>
+                <input type="text" th:field="*{venue}" class="form-control" required>
+                <div>
+                    <label>Winner:</label>
+                    <select th:field="*{winner}" class="form-control" required>
+                        <th:block th:each="team : ${teams}">
+                            <option th:text="${team.name}" th:value="${team.id}"/>
+                        </th:block>
+                    </select>
+                    <label>Looser:</label>
+                    <select th:field="*{looser}" class="form-control" required>
+                        <th:block th:each="team : ${teams}">
+                            <option th:text="${team.name}" th:value="${team.id}"/>
+                        </th:block>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

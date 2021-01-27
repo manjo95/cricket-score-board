@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Match Details</title>
+
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:if="${matchdetail.id == null}"><h1>Enter Match Details</h1></div>
+    <div th:unless="${matchdetail.id == null}"><h1>Edit Match Details</h1></div>
+    <div>
+        <form th:action="@{/matchDetails/new/save}" th:object="${matchdetail}" method="post" style="max-width: 600px; margin: 0 auto;">
+            <input type="hidden" th:field="*{id}" th:value="${matchdetail.id}">
+            <div class="form-group">
+
+                <label>Select Match:</label>
+                <select th:field="*{matchid}" class="form-control" required>
+                    <th:block th:each="match : ${matches}">
+                        <option th:text="${match.name}" th:value="${match.id}"/>
+                    </th:block>
+                </select>
+
+                <label>Select Player:</label>
+                <select th:field="*{playerid}" class="form-control" required>
+                    <th:block th:each="player : ${playersList}">
+                        <option th:text="${player.name}" th:value="${player.id}"/>
+                    </th:block>
+                </select>
+
+                <label>no.of Singles:</label><br>
+                <input type="number" th:field="*{singles}" class="form-control" required>
+                <label>No.of Fours:</label><br>
+                <input type="number" th:field="*{fours}" class="form-control" required>
+                <label>No.of Sixes:</label><br>
+                <input type="number" th:field="*{sixes}" class="form-control" required>
+                <div>
+
+
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

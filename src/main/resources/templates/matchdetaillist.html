@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Match Details</title>
+
+</head>
+<body>
+
+<div class="container text-center">
+    <h1>Match Details</h1>
+    <div>
+        <table class="table table-bordered">
+
+            <thead class="text-center">
+
+            <tr>
+                <th>ID</th>
+                <th>Match</th>
+                <th>Player</th>
+                <th>singles</th>
+                <th>Fours</th>
+                <th>Sixes</th>
+                <th>Edit / Delete</th>
+            </tr>
+
+            </thead>
+            <tbody>
+
+            <tr th:each="matchdetail : ${matchdetails}">
+                <td>[[${matchdetail.id}]]</td>
+                <td>[[${matchdetail.matchid.name}]]</td>
+                <td>[[${matchdetail.playerid.name}]]</td>
+                <td>[[${matchdetail.singles}]]</td>
+                <td>[[${matchdetail.fours}]]</td>
+                <td>[[${matchdetail.sixes}]]</td>
+
+                <td><a th:href="@{'/matchDetails/edit/'+${matchdetail.id}}">Edit</a>
+                    &nbsp;&nbsp;
+                    <a th:href="@{'/matchDetails/delete/'+${matchdetail.id}}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</body>
+</html>
