@@ -1,61 +1,137 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Score Board Manager</title>
+    <style>
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: #333;
+            color: white;
+            font-size: 15px;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a, .logoutbtn input, .logoutbtn form {
+            float: left;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 14px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 12px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn, .logoutbtn input:hover, logoutbtn form:hover {
+            background-color: #3ea5ae;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgb(73, 138, 150);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: #000000;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+    </style>
 </head>
 <body>
-<div align="center">
-    <div sec:authorize="isAuthenticated()">
-        Welcome <b><span sec:authentication="name">Username</span></b>
+<div class="header">
+    <h1>Cricket Score Board</h1>
+    <p>Welcome <b><span sec:authentication="name">Username</span></b>
         &nbsp;
-        <i><span sec:authentication="principal.authorities">Roles</span></i>
+        <i><span sec:authentication="principal.authorities">Roles</span></i></p>
+    <br/>
+
+</div>
+<div class="navbar">
+    <a href="/">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Teams
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a th:href="@{/teamlist}" >List Team</a>
+            <a th:href="@{/teams/new}">Add new Team</a>
+        </div>
     </div>
 
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout"/>
-    </form>
-
-    <h1>Score Board</h1>
-
-
-    <div sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
-
-        <div>
-            <a th:href="@{/teamlist}" >teams</a>
-        </div>
-
-        <div>
-            <a th:href="@{/teams/new}">Add Team</a>
-        </div>
-        <div>
+    <div class="dropdown">
+        <button class="dropbtn">Players
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
             <a th:href="@{/playerslist}">List players</a>
-        </div>
-
-        <div>
             <a th:href="@{/players/new}">Add players</a>
         </div>
-
-        <div>
-            <a th:href="@{/matches/new}">Create New Match</a>
-        </div>
-
-        <div>
-            <a th:href="@{/matches}">Show all the matches</a>
-        </div>
-
-        <div>
-            <a th:href="@{/matchDetails/new}">update match scores</a>
-        </div>
-        <div>
-            <a th:href="@{/matchDetails}">Show match scores</a>
-        </div>
-
     </div>
 
-    <br/><br/>
-    <h1>Welcome</h1>
+    <div class="dropdown">
+        <button class="dropbtn">Matches
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a th:href="@{/matches}">List matches</a>
+            <a th:href="@{/matches/new}">Create New Match</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Match Details
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a th:href="@{/matchDetails}">List Details</a>
+            <a th:href="@{/matchDetails/new}">Add new Entry</a>
+        </div>
+    </div>
+    <div class="logoutbtn">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+    </div>
+
 </div>
+
 </body>
 </html>

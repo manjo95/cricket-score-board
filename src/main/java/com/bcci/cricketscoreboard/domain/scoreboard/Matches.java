@@ -3,10 +3,11 @@ package com.bcci.cricketscoreboard.domain.scoreboard;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
-public class Matches {
+public class Matches implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

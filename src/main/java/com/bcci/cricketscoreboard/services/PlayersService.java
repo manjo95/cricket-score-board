@@ -25,9 +25,16 @@ public class PlayersService {
     public Players getPlayersId(int id) {
         return playerRepository.findById(id).orElse(null);
     }
+
     public String deletePlayers(int id) {
         playerRepository.deleteById(id);
         return "removed player" + id;
+    }
+    public List<Players> searchAllPlayers(String keyword) {
+        if (keyword != null) {
+            return playerRepository.searchPlayer(keyword);
+        }
+        return playerRepository.findAll();
     }
 
 }

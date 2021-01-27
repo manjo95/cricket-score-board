@@ -5,6 +5,7 @@ import com.bcci.cricketscoreboard.domain.scoreboard.Teams;
 import com.bcci.cricketscoreboard.services.PlayersService;
 import com.bcci.cricketscoreboard.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +23,17 @@ public class PlayersController {
     @Autowired
     private TeamService teamService;
 
+//    @GetMapping({"/playerslist", "playerslist"})
+//    public String findAllPlayers(Model model) {
+//        List<Players> playersList = playersService.getPlayers();
+//        model.addAttribute("playersList", playersList);
+//        return "playersList";
+//    }
     @GetMapping({"/playerslist", "playerslist"})
-    public String findAllPlayers(Model model) {
-        List<Players> playersList = playersService.getPlayers();
+    public String findAllPlayers(Model model, @Param("keyword") String keyword) {
+        List<Players> playersList = playersService.searchAllPlayers(keyword);
         model.addAttribute("playersList", playersList);
+        model.addAttribute("keyword", keyword);
         return "playersList";
     }
 
@@ -38,11 +46,12 @@ public class PlayersController {
     }
 
     @PostMapping("/saveplayer")
-    public String savePlayers(Players players, Model model){
+    public String savePlayers(Players players, Model model, @Param("keyword") String keyword){
         playersService.savePlayers(players);
-        List<Players> playersList = playersService.getPlayers();
+        List<Players> playersList = playersService.searchAllPlayers(keyword);
         model.addAttribute("playersList", playersList);
-        return "/playersList";
+        model.addAttribute("keyword", keyword);
+        return "playersList";
     }
 
     @GetMapping("/playerslist/edit/{id}")
@@ -54,10 +63,11 @@ public class PlayersController {
         return "playerform";
     }
     @GetMapping("/playerslist/delete/{id}")
-    public String deletePlayer(@PathVariable("id") Integer id, Model model){
+    public String deletePlayer(@PathVariable("id") Integer id, Model model, @Param("keyword") String keyword){
         String del = playersService.deletePlayers(id);
-        List<Players> playersList = playersService.getPlayers();
+        List<Players> playersList = playersService.searchAllPlayers(keyword);
         model.addAttribute("playersList", playersList);
-        return "/playersList";
+        model.addAttribute("keyword", keyword);
+        return "playersList";
     }
 }

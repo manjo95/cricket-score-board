@@ -12,6 +12,20 @@
 <div class="container text-center">
     <h1>List of Players</h1>
     <div>
+        <div class="text-center">
+            <a th:href="@{/players/new}">Add players</a>
+        </div>
+
+        <br/><br/>
+        <form th:action="@{/playerslist}">
+            Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" />
+            &nbsp;
+            <input type="submit" value="Search" />
+            &nbsp;
+            <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+        </form>
+        <br/><br/>
+
         <table class="table table-bordered">
 
             <thead class="text-center">
@@ -42,3 +56,8 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+</script>

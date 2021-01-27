@@ -28,4 +28,11 @@ public class MatchesService {
         matchesRepository.deleteById(id);
         return "removed Match" + id;
     }
+
+    public List<Matches> searchAllMatches(String keyword) {
+        if (keyword != null) {
+            return matchesRepository.searchMatches(keyword);
+        }
+        return matchesRepository.findAll();
+    }
 }
