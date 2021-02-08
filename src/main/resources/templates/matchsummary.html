@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Playerlist</title>
+
+</head>
+<body>
+
+<div class="container text-center">
+    <h1>Match Summary</h1>
+    <div>
+        <div class="text-center">
+            <a th:href="@{/}">Home</a>
+        </div>
+
+        <br/><br/>
+
+        <form th:action="@{/matchsummary}">
+
+            Select Team:
+            <select class="form-control" required>
+            <th:block th:each="matches : ${matches}">
+                <option th:text="${matches.name}" th:value="${matches.id}"/>
+                <input type="hidden" name="id" id="id" size="50" th:value="${matches.id}" />
+            </th:block>
+            </select>
+
+            &nbsp;
+            <input type="submit" value="Submit">
+            &nbsp;
+            <input type="button" value="Clear" id="btn_clear" onclick="clearSearch()" />
+        </form>
+
+        <div class="table table-bordered">
+            <table>
+                <thead>
+                   <tr>
+                       <th>Winner</th>
+                       <th>looser</th>
+                   </tr>
+                </thead>
+                <tbody>
+                <tr th:each="match : ${matches}">
+                    <td th:text="'match.name'">match name</td>
+                </tr>
+                <tr>
+                    <th>
+                    <td th:text="${winner_total}">total</td>
+                    <td th:text="${winner_six}">six</td>
+                    <td th:text="${winner_four}">four</td>
+                    <td th:text="${winner_single}">single</td>
+                    </th>
+                    <th>
+                    <td th:text="${Looser_total}">total</td>
+                    <td th:text="${Looser_six}">six</td>
+                    <td th:text="${Looser_four}">four</td>
+                    <td th:text="${Looser_single}">single</td>
+                    </th>
+
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <br/><br/>
+
+
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+</script>

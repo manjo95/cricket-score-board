@@ -3,12 +3,11 @@ package com.bcci.cricketscoreboard.controllers;
 import com.bcci.cricketscoreboard.domain.scoreboard.Matchdetails;
 import com.bcci.cricketscoreboard.domain.scoreboard.Matches;
 import com.bcci.cricketscoreboard.domain.scoreboard.Players;
-import com.bcci.cricketscoreboard.domain.scoreboard.Teams;
 import com.bcci.cricketscoreboard.services.MatchDetailService;
 import com.bcci.cricketscoreboard.services.MatchesService;
 import com.bcci.cricketscoreboard.services.PlayersService;
-import com.bcci.cricketscoreboard.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +30,7 @@ public class MatchDetailsController {
 
     @GetMapping("/matchDetails")
     public String getMatchDetails(Model model){
-        List<Matchdetails> matchdetails = matchDetailService.getMatchdetails();
+        List<Matchdetails> matchdetails = matchDetailService.getMatchDetails();
         model.addAttribute("matchdetails",matchdetails);
         return "matchdetaillist";
     }
@@ -49,13 +48,13 @@ public class MatchDetailsController {
     @PostMapping("/matchDetails/new/save")
     public String saveMatchDetail(Matchdetails matchdetailsmodel, Model model){
         matchDetailService.saveMatchDetails(matchdetailsmodel);
-        List<Matchdetails> matchdetails = matchDetailService.getMatchdetails();
+        List<Matchdetails> matchdetails = matchDetailService.getMatchDetails();
         model.addAttribute("matchdetails",matchdetails);
         return "matchdetaillist";
     }
     @GetMapping("/matchDetails/edit/{id}")
     public String editMatchDetails(@PathVariable("id") Integer id, Model model){
-        Matchdetails mdetails = matchDetailService.getMatchdetailsById(id);
+        Matchdetails mdetails = matchDetailService.getMatchDetailsById(id);
         List<Players> playersList = playersService.getPlayers();
         List<Matches> matches = matchesService.getMatches();
         model.addAttribute("playersList",playersList);
@@ -66,10 +65,12 @@ public class MatchDetailsController {
     @GetMapping("/matchDetails/delete/{id}")
     public String deleteMatchDetail(@PathVariable("id") Integer id, Model model){
         String del = matchDetailService.DeleteMatchDetail(id);
-        List<Matchdetails> matchdetails = matchDetailService.getMatchdetails();
+        List<Matchdetails> matchdetails = matchDetailService.getMatchDetails();
         model.addAttribute("matchdetails",matchdetails);
         return "matchdetaillist";
     }
+
+
 
 
 
